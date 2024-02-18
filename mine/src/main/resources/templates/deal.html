@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Deal Form</title>
+    <link rel="stylesheet" th:href="@{/styles.css}" />
+</head>
+<body>
+<form method="post" th:if="${selectedDealType}" action="#" th:action="@{/deal/submit}" th:object="${deal}" >
+    <h1>Создайте новую сделку</h1>
+    <img th:src="@{/images/demospring.png}"/>
+    <div class="grid">
+    <p th:if="${selectedDealType}" th:text="${'Выбранный тип: ' + selectedDealType.type}"></p>
+    <!-- <p th:unless="${selectedDealType}">Для начала, выберите тип сделки.</p>-->
+    
+        <input type="hidden" name="typeId" th:value="${deal.typeId}" />
+        
+        <label for="ticker">Тикер:</label>
+        <input type="text" id="ticker" th:field="*{ticker}" required>
+        <span class="validationError" 
+        th:if="${#fields.hasErrors('ticker')}" 
+        th:errors="*{ticker}">Ticker Error</span><br>
+        
+        <label for="orderNumber">Номер поручения сделки:</label>
+        <input type="text" id="orderNumber" th:field="*{orderNumber}" required>
+        <span class="validationError" 
+        th:if="${#fields.hasErrors('orderNumber')}" 
+        th:errors="*{orderNumber}">Order Number Error</span><br>
+        
+        <label for="dealNumber">Номер сделки:</label>
+        <input type="text" id="dealNumber" th:field="*{dealNumber}" required>
+        <span class="validationError" 
+        th:if="${#fields.hasErrors('dealNumber')}" 
+        th:errors="*{dealNumber}">Deal Number Error</span><br>
+        
+        <label for="dealQuantity">Количество ценных бумаг по сделке:</label>
+        <input type="text" id="dealQuantity" th:field="*{dealQuantity}" required>
+        <span class="validationError" 
+        th:if="${#fields.hasErrors('dealQuantity')}" 
+        th:errors="*{dealQuantity}">Quantity Error</span><br>
+        
+        <label for="dealPrice">Цена по сделке:</label>
+        <input type="text" id="dealPrice" th:field="*{dealPrice}" required>
+        <span class="validationError" 
+        th:if="${#fields.hasErrors('dealPrice')}" 
+        th:errors="*{dealPrice}">Price Error</span><br>
+        
+        <label for="dealTotalCost">Общая сумма сделки:</label>
+        <input type="text" id="dealTotalCost" th:field="*{dealTotalCost}" required>
+        <span class="validationError" 
+        th:if="${#fields.hasErrors('dealTotalCost')}" 
+        th:errors="*{dealTotalCost}">Total Cost Error</span><br>
+        
+        <label for="dealTrader">Код трейдера:</label>
+        <input type="text" id="dealTrader" th:field="*{dealTrader}" required>
+        <span class="validationError" 
+        th:if="${#fields.hasErrors('dealTrader')}" 
+        th:errors="*{dealTrader}">Trader Error</span><br>
+        
+        <label for="dealCommission">Комиссия торговой площадки:</label>
+        <input type="text" id="dealCommission" th:field="*{dealCommission}" required>
+        <span class="validationError" 
+        th:if="${#fields.hasErrors('dealCommission')}" 
+        th:errors="*{dealCommission}">Commission Error</span><br>
+        
+        <button>Отправить </button>
+        </div>
+    </form>
+    <!-- <a th:unless="${selectedDealType}" href="/typedeal" class="button">Вернуться</a>-->
+</body>
+</html>
